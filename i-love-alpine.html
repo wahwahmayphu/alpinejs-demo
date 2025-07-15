@@ -2,6 +2,7 @@
    <head>
           <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
          <script src="https://cdn.tailwindcss.com"></script>
+         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.10.0/axios.min.js" integrity="sha512-WkZrEcQ5LMyNy6Y2PQf+Tu3vMcsmKKRKuPXtJSTHQJ3mpuvLRlA5dlDDhrrcXfyWr6Z/y3wIMfjfqVFO/gDZYQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 
          <title>Alpine JS Crash Course</title>
@@ -94,10 +95,21 @@
                <button @click="posts.push({title: 'New Post'})" class="bg-blue-800 text-white px-4 py-2 rounded-lg mt-4">Add Post</button>
                
                <div class="my-6">
-                   <!-- x-ref -->
-                <div x-ref="text"></div>
+               <!-- x-ref -->
+                <div x-ref="text">Hello Universe</div>
 
-                <button class="bg-black text-white p-2 rounded-lg">Click</button>
+                 <!--  another element -->
+                <button @click="$refs.text.remove()"
+                class="bg-black text-white p-2 rounded-lg">Click</button>
+               </div>
+
+               <div>
+                  <!-- x-html -->
+                   <div x-html="(await axios.get('./partial.html')).data">...</div>
+
+                   <!-- $el -->   
+                    <!--  current element -->
+                    <button x-on:click="$el.innerHTML = 'Hello World' " class="mt-4 p-4 border">Replace Text</button>
                </div>
 
               
